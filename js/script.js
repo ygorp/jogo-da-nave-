@@ -11,6 +11,9 @@ function start() {
   //Principais variáveis do jogo
 
   var jogo = {}
+  var velocidade = 5
+  var posicaoY = parseInt(Math.random() * 334)
+
   var TECLA = {
     W: 87,
     S: 83,
@@ -34,6 +37,7 @@ function start() {
   jogo.timer = setInterval(loop, 30)
 
   function loop() {
+    moveinimigo1()
     movejogador()
     movefundo()
   } // Fim da função loop()
@@ -47,22 +51,20 @@ function start() {
 
   function movejogador() {
     if (jogo.pressionou[TECLA.W]) {
-      var topo = parseInt($('#jogador').css('top'));
-      $('#jogador').css('top', topo - 10);
+      var topo = parseInt($('#jogador').css('top'))
+      $('#jogador').css('top', topo - 10)
 
-      if (topo<=0) {
-		
-        $("#jogador").css("top",topo+10);
+      if (topo <= 0) {
+        $('#jogador').css('top', topo + 10)
       }
     }
 
     if (jogo.pressionou[TECLA.S]) {
-      var topo = parseInt($('#jogador').css('top'));
-      $('#jogador').css('top', topo + 10);
+      var topo = parseInt($('#jogador').css('top'))
+      $('#jogador').css('top', topo + 10)
 
-      if (topo>=434) {	
-        $("#jogador").css("top",topo-10);
-          
+      if (topo >= 434) {
+        $('#jogador').css('top', topo - 10)
       }
     }
 
@@ -70,4 +72,16 @@ function start() {
       //Chama função Disparo
     }
   } // fim da função movejogador()
+
+  function moveinimigo1() {
+    posicaoX = parseInt($('#inimigo1').css('left'))
+    $('#inimigo1').css('left', posicaoX - velocidade)
+    $('#inimigo1').css('top', posicaoY)
+
+    if (posicaoX <= 0) {
+      posicaoY = parseInt(Math.random() * 334)
+      $('#inimigo1').css('left', 694)
+      $('#inimigo1').css('top', posicaoY)
+    }
+  } //Fim da função moveinimigo1()
 } // Fim da função start
